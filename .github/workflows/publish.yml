@@ -19,6 +19,7 @@ jobs:
           fetch-depth: 0
 
       - name: Create GitHub Release with Copilot-generated notes
+        shell: pwsh
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
