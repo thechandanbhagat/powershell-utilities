@@ -1,0 +1,28 @@
+name: Publish to PowerShell Gallery
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'UtilModule.psd1'
+      - 'UtilModule.psm1'
+      - 'Functions/**'
+
+jobs:
+  publish:
+    name: Publish Module
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Publish to PSGallery
+        shell: pwsh
+        env:
+          PSGALLERY_API_KEY: ${{ secrets.PSGALLERY_API_KEY }}
+        run: |
+          $version = (Import-PowerShellDataFile ./UtilModule.psd1).ModuleVersion
+          Write-Host "Publishing UtilModule v$version"
+          Publish-Module -Path . -NuGetApiKey $env:PSGALLERY_API_KEY -Verbose
