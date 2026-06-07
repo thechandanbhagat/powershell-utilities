@@ -22,10 +22,17 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create ${{ github.ref_name }} \
-            --title "${{ github.ref_name }}" \
-            --generate-notes \
-            --verify-tag
+          $tag = "${{ github.ref_name }}"
+          gh release view $tag > $null 2>&1
+          if ($LASTEXITCODE -eq 0) {
+            Write-Host "Release for $tag already exists. Skipping creation."
+          }
+          else {
+            gh release create $tag \
+              --title "$tag" \
+              --generate-notes \
+              --verify-tag
+          }
 
       - name: Publish to PSGallery
         shell: pwsh
@@ -34,4 +41,4 @@ jobs:
         run: |
           $version = (Import-PowerShellDataFile ./UtilModule.psd1).ModuleVersion
           Write-Host "Publishing UtilModule v$version"
-          Publish-Module -Path . -NuGetApiKey $env:PSGALLERY_API_KEY -Verbose
+          Publish-Module -Path ./UtilModule.psd1 -NuGetApiKey $env:PSGALLERY_API_KEY -Verbose
