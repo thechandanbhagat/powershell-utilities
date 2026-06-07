@@ -29,10 +29,7 @@ jobs:
             Write-Host "Release for $tag already exists. Skipping creation."
           }
           else {
-            gh release create $tag \
-              --title "$tag" \
-              --generate-notes \
-              --verify-tag
+            gh release create $tag --title "$tag" --generate-notes --verify-tag
           }
 
       - name: Publish to PSGallery
