@@ -1,4 +1,4 @@
-function UtilMan.DecodeJwt {
+﻿function UtilMan.DecodeJwt {
    param([string]$token)
  
     #Validate as per https://tools.ietf.org/html/rfc7519

@@ -1,4 +1,4 @@
-function UtilMan.SBToken {
+﻿function UtilMan.SBToken {
 	param(
 		[Alias("u")][string]$uri,
         [Alias("p")][string]$policy,
