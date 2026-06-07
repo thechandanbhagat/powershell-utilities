@@ -1,4 +1,4 @@
-function az-SBToken {
+function UtilMan.SBToken {
 	param(
 		[Alias("u")][string]$uri,
         [Alias("p")][string]$policy,
@@ -31,4 +31,4 @@ $SASToken | Set-Clipboard
 return $SASToken
 }
 
-Export-ModuleMember -Function az-SBToken
+Export-ModuleMember -Function UtilMan.SBToken

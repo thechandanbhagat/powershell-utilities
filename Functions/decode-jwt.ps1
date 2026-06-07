@@ -1,4 +1,4 @@
-function Util-Decode-Jwt {
+function UtilMan.DecodeJwt {
    param([string]$token)
  
     #Validate as per https://tools.ietf.org/html/rfc7519
@@ -25,4 +25,4 @@ function Util-Decode-Jwt {
     $tokobj = $tokenArray | ConvertFrom-Json | fl | Out-Default
 }
 
-Export-ModuleMember -Function Util-Decode-Jwt
+Export-ModuleMember -Function UtilMan.DecodeJwt

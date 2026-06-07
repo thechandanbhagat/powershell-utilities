@@ -1,4 +1,4 @@
-function Util-KillPort {
+function UtilMan.KillPort {
     param(
         [Parameter(Mandatory = $true, Position = 0)]
         [Alias("p")]
@@ -30,4 +30,4 @@ function Util-KillPort {
     }
 }
 
-Export-ModuleMember -Function Util-KillPort
+Export-ModuleMember -Function UtilMan.KillPort
