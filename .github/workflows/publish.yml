@@ -37,6 +37,14 @@ jobs:
         env:
           PSGALLERY_API_KEY: ${{ secrets.PSGALLERY_API_KEY }}
         run: |
+          $stagingPath = Join-Path $env:RUNNER_TEMP "psgallery-publish"
+          $modulePath = Join-Path $stagingPath "UtilModule"
+
+          New-Item -Path $modulePath -ItemType Directory -Force | Out-Null
+          Copy-Item -Path ./UtilModule.psd1 -Destination $modulePath -Force
+          Copy-Item -Path ./UtilModule.psm1 -Destination $modulePath -Force
+          Copy-Item -Path ./Functions -Destination $modulePath -Recurse -Force
+
           $version = (Import-PowerShellDataFile ./UtilModule.psd1).ModuleVersion
           Write-Host "Publishing UtilModule v$version"
-          Publish-Module -Path ./UtilModule.psd1 -NuGetApiKey $env:PSGALLERY_API_KEY -Verbose
+          Publish-Module -Path $modulePath -NuGetApiKey $env:PSGALLERY_API_KEY -Verbose
