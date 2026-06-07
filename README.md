@@ -25,6 +25,16 @@ az-sbtoken -u <url> -p <policy> -k <key> -t <time>
 ### util-decode-jwt
 
 ---
+### Util-KillPort
+```powershell
+# Kill process on port 3000
+Util-KillPort 3000
+
+# Using alias
+Util-KillPort -p 8080
+```
+
+---
 ## Get list of Commands 
 ```powershell
 Get-Command -Module UtilModule -CommandType Function
